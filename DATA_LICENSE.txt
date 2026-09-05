@@ -12,8 +12,8 @@ https://echonet.jp/spec_mra/
 The bundled data identifies itself as follows in metaData.json:
 
 Copyright (C) 2021-2026 Kanagawa Institute of Technology, ECHONET Consortium
-Data version: 1.3.2
-Release: R
+Data version: 1.4.0
+Release: R (rev.3)
 Date: 2026-06-12
 
 License

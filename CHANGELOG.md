@@ -1,6 +1,6 @@
 ## [Unreleased]
 
-- Updated bundled ECHONET Lite MRA data to version 1.3.2 (Release R).
+- Updated bundled ECHONET Lite MRA data to version 1.4.0 (Release R rev.3).
 
 ## [0.1.0] - 2026-06-30
 

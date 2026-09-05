@@ -122,7 +122,7 @@ module EchonetLiteGem
 
     private
 
-      # MRA_V1.3.2のjsonファイルから該当するEOJクラスコードのjsonを選択して、rubyハッシュにparse
+      # MRA_V1.4.0のjsonファイルから該当するEOJクラスコードのjsonを選択して、rubyハッシュにparse
       def make_device_json
         return if eoj.nil?
 
@@ -343,7 +343,7 @@ module EchonetLiteGem
 
     private
 
-      # MRA_V1.3.2のjsonファイルから自インスタンスのものを選択して、rubyハッシュにparse
+      # MRA_V1.4.0のjsonファイルから自インスタンスのものを選択して、rubyハッシュにparse
       def sjson
         return unless @sjson.nil?
         return if @seoj.nil?
@@ -358,7 +358,7 @@ module EchonetLiteGem
         JsonRefs.call(@sjson)
       end
 
-      # MRA_V1.3.2のjsonファイルから送信先インスタンスのものを選択して、rubyハッシュにparse
+      # MRA_V1.4.0のjsonファイルから送信先インスタンスのものを選択して、rubyハッシュにparse
       def djson
         return unless @djson.nil?
         return if @deoj.nil?
