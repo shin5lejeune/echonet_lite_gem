@@ -1,14 +1,14 @@
 {
-  "eoj": "0x0016",
+  "eoj": "0x0002",
   "validRelease": {
     "from": "A",
     "to": "latest"
   },
   "className": {
-    "ja": "風呂沸き上がりセンサ",
-    "en": "Bath heating status sensor"
+    "ja": "防犯センサ",
+    "en": "Crime prevention sensor"
   },
-  "shortName": "bathHeatingStatusSensor",
+  "shortName": "crimePreventionSensor",
   "elProperties": [
     {
       "epc": "0xB0",
@@ -41,8 +41,8 @@
         "to": "latest"
       },
       "propertyName": {
-        "ja": "風呂沸き上がり検知状態",
-        "en": "Bath heating detection status"
+        "ja": "侵入発生状態",
+        "en": "Invasion occurrence status"
       },
       "shortName": "detection",
       "accessRule": {
@@ -51,11 +51,35 @@
         "inf": "required"
       },
       "descriptions": {
-        "ja": "風呂沸き上がり検知有無を示す",
-        "en": "This property indicates bath heating detection status"
+        "ja": "侵入の発生状況を示す",
+        "en": "This property indicates invasion occurrence status"
       },
       "data": {
         "$ref": "#/definitions/state_Detected-NotDetected_4142"
+      }
+    },
+    {
+      "epc": "0xBF",
+      "validRelease": {
+        "from": "A",
+        "to": "latest"
+      },
+      "propertyName": {
+        "ja": "侵入発生状態リセット設定",
+        "en": "Invasion occurrence status resetting"
+      },
+      "shortName": "reset",
+      "accessRule": {
+        "get": "notApplicable",
+        "set": "optional",
+        "inf": "notApplicable"
+      },
+      "descriptions": {
+        "ja": "0x00を書き込むことにより、侵入発生状態をリセットする",
+        "en": "Resets invasion occurrence status by setting 0x00"
+      },
+      "data": {
+        "$ref": "#/definitions/state_Reset_00"
       }
     }
   ]

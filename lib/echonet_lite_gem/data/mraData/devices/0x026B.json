@@ -879,12 +879,6 @@
             "size": 1,
             "enum": [
               {
-                "edt": "0x00",
-                "descriptions": {
-                  "ja": "未設定"
-                }
-              },
-              {
                 "edt": "0x09",
                 "name": "at0900",
                 "descriptions": {
