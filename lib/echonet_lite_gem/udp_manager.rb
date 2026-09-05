@@ -2,6 +2,9 @@ module EchonetLiteGem
   class UDPManager
     include Singleton
 
+    MAX_RESPONSE_QUEUES = 4096
+    MAX_QUEUE_SIZE = 128
+
     attr_reader :response_queue
 
     def initialize
@@ -16,7 +19,7 @@ module EchonetLiteGem
       @udp.setsockopt(Socket::IPPROTO_IP, Socket::IP_MULTICAST_TTL, 1) # マルチキャストの生存時間を自ネットワーク内に留める
       @udp.setsockopt(Socket::SOL_SOCKET, Socket::SO_BROADCAST, 1) # ブロードキャスト送信を許可
 
-      @response_queue = Hash.new { |hash, key| hash[key] = Queue.new }
+      @response_queue = Hash.new { |hash, key| hash[key] = SizedQueue.new(MAX_QUEUE_SIZE) }
 
       @recv_worker = Thread.new do
         recv_thread
@@ -91,7 +94,7 @@ module EchonetLiteGem
           begin
             res = @udp.recvfrom(300) # res_msgにはメッセージが、sockaddrにはソケットのアドレスが代入される
             tid = res[0][2, 2].unpack1("n") # トランザクションID
-            @response_queue[tid] << res
+            enqueue_response(tid, res)
           rescue IOError, Errno::EBADF # UDPソケットが閉じられた場合の例外処理
             break if @closed # recv_threadの無限ループを終了させるためのフラグが立っている場合は、recv_threadを終了する
 
@@ -100,6 +103,21 @@ module EchonetLiteGem
             exit
           end
         end
+      end
+
+      def enqueue_response(tid, response)
+        @mutex.synchronize do
+          unless @response_queue.key?(tid)
+            return if @response_queue.length >= MAX_RESPONSE_QUEUES
+
+            @response_queue[tid] = SizedQueue.new(MAX_QUEUE_SIZE)
+          end
+
+          queue = @response_queue[tid]
+          queue.push(response, true)
+        end
+      rescue ThreadError
+        # キューが満杯の場合は、受信スレッドを止めずにパケットを破棄する
       end
   end
 end

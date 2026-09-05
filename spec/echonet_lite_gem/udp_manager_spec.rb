@@ -295,6 +295,30 @@ RSpec.describe EchonetLiteGem::UDPManager do
 
       expect(received).to eq [@msg, 'sockaddr']
     end
+
+    it '1つのTIDのキューには最大件数(128)を超えて保持しない' do
+      manager = @udp_m
+      response = [@msg, 'sockaddr']
+
+      129.times do
+        manager.__send__(:enqueue_response, @telegram.tid, response)
+      end
+
+      queue = manager.response_queue[@telegram.tid]
+      expect(queue.size).to eq EchonetLiteGem::UDPManager::MAX_QUEUE_SIZE
+    end
+
+    it 'TIDごとのキュー数の上限は4096件' do
+      manager = @udp_m
+      response = [@msg, 'sockaddr']
+
+      4097.times do |tid|
+        manager.__send__(:enqueue_response, tid, response)
+      end
+
+      expect(manager.response_queue.size).to eq EchonetLiteGem::UDPManager::MAX_RESPONSE_QUEUES
+      expect(manager.response_queue).not_to have_key(EchonetLiteGem::UDPManager::MAX_RESPONSE_QUEUES)
+    end
   end
 
   describe '#recv_thread' do
