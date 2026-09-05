@@ -10,6 +10,10 @@ module EchonetLiteGem
 
     # 引数に指定したUDP電文をETelegramに変換
     def read(telegram)
+      raise TelegramError, "電文は文字列で指定してください" unless telegram.is_a?(String)
+      raise TelegramError, "電文が短すぎます" if telegram.bytesize < 12
+      raise TelegramError, "不正なECHONET Liteヘッダーです" unless telegram.byteslice(0, 2)&.bytes == [0x10, 0x81]
+
       unpack_tgm = telegram.unpack("C*")
       ehd1 = unpack_tgm[0, 1].pack("C") # 伝聞ヘッダー１　ECHONET Lite
       ehd2 = unpack_tgm[1, 1].pack("C") # 伝聞ヘッダー２　規定電文形式
@@ -22,16 +26,27 @@ module EchonetLiteGem
       pdc = []
       edt = []
       add_num = 0
-      (0..(opc - 1)).each do |i|
-        epc.append unpack_tgm[12 + add_num, 1].pack("C").unpack1('H*').upcase # Echonetプロパティ
-        pdc.append unpack_tgm[13 + add_num] # プロパティデータカウンタ
+
+      (0...opc).each do |i|
+        property_offset = 12 + add_num
+        raise TelegramError, "プロパティ電文が途中で終了しています" if property_offset + 2 > unpack_tgm.length
+
+        epc.append unpack_tgm[property_offset, 1].pack("C").unpack1('H*').upcase # Echonetプロパティ
+        pdc.append unpack_tgm[property_offset + 1] # プロパティデータカウンタ
+        data_offset = property_offset + 2
+        raise TelegramError, "プロパティ値データが途中で終了しています" if data_offset + pdc[i] > unpack_tgm.length
+
         if pdc[i].positive?
-          edt.append unpack_tgm[14 + add_num, pdc[i]].pack("C*").unpack1('H*').upcase
+          edt.append unpack_tgm[data_offset, pdc[i]].pack("C*").unpack1('H*').upcase
         else
           edt.append nil
         end
         add_num += 2 + pdc[i]
       end
+
+      expected_length = 12 + add_num
+      raise TelegramError, "電文に余分なデータがあります" unless expected_length == unpack_tgm.length
+
       ETelegram.new ehd1:, ehd2:, tid:, seoj:, deoj:, esv:, opc:, epc:, pdc:, edt:
     end
 

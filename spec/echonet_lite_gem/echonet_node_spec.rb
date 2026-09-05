@@ -61,6 +61,35 @@ RSpec.describe EchonetLiteGem::EchonetNode do
       it "生成したETelegramからmake_telegramメソッドで電文を再生成しても元の電文と一致する" do
         expect(@en.read(@msg).make_telegram).to eq @msg
       end
+
+      it "12バイト未満の電文を拒否する" do
+        expect { @en.read("\x10\x81".b) }.to raise_error(EchonetLiteGem::TelegramError, "電文不備:電文が短すぎます")
+      end
+
+      it "ECHONET Liteヘッダーでない電文を拒否する" do
+        invalid_message = @msg.dup
+        invalid_message.setbyte(1, 0x80)
+
+        expect { @en.read(invalid_message) }.to raise_error(EchonetLiteGem::TelegramError, "電文不備:不正なECHONET Liteヘッダーです")
+      end
+
+      it "OPCに対してプロパティが不足している電文を拒否する" do
+        invalid_message = @msg.dup
+        invalid_message.setbyte(11, 3)
+
+        expect { @en.read(invalid_message) }.to raise_error(EchonetLiteGem::TelegramError, "電文不備:プロパティ電文が途中で終了しています")
+      end
+
+      it "PDCに対してプロパティ値データが不足している電文を拒否する" do
+        invalid_message = @msg.byteslice(0, @msg.bytesize - 1)
+        invalid_message.setbyte(13, 3)
+
+        expect { @en.read(invalid_message) }.to raise_error(EchonetLiteGem::TelegramError, "電文不備:プロパティ値データが途中で終了しています")
+      end
+
+      it "電文末尾の余分なデータを拒否する" do
+        expect { @en.read(@msg.concat("\x00")) }.to raise_error(EchonetLiteGem::TelegramError, "電文不備:電文に余分なデータがあります")
+      end
     end
   end
 
