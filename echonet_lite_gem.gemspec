@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["shin5lejeune"]
   spec.email = ["shin5lejeune@gmail.com"]
 
-  spec.summary = "ECHONET Lite support for My HEMS"
-  spec.description = "ECHONET Lite telegram parsing and node communication"
+  spec.summary = "Ruby library for ECHONET Lite messaging and device control"
+  spec.description = "A Ruby library for generating and parsing ECHONET Lite telegrams, discovering devices, and reading or writing device properties."
   spec.homepage = "https://github.com/shin5lejeune/echonet_lite_gem.git"
   spec.license = "MIT"
 
@@ -17,9 +17,9 @@ Gem::Specification.new do |spec|
 
   spec.metadata['rubygems_mfa_required'] = 'true'
   # spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
-  # spec.metadata["homepage_uri"] = spec.homepage
-  # spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
-  # spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+  spec.metadata["homepage_uri"] = spec.homepage
+  spec.metadata["source_code_uri"] = spec.homepage
+  spec.metadata["changelog_uri"] = "#{spec.homepage}/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
