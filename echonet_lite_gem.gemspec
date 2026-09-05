@@ -9,7 +9,8 @@ Gem::Specification.new do |spec|
   spec.email = ["shin5lejeune@gmail.com"]
 
   spec.summary = "Ruby library for ECHONET Lite messaging and device control"
-  spec.description = "A Ruby library for generating and parsing ECHONET Lite telegrams, discovering devices, and reading or writing device properties."
+  spec.description = "A Ruby library for generating and parsing ECHONET Lite telegrams, " \
+                     "discovering devices, and reading or writing device properties."
   spec.homepage = "https://github.com/shin5lejeune/echonet_lite_gem.git"
   spec.license = "MIT"
 
