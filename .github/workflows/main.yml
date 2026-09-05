@@ -29,4 +29,4 @@ jobs:
     - name: Build gem
       run: gem build echonet_lite_gem.gemspec
     - name: Install built gem
-      run: gem install ./echonet_lite_gem-*.gem --local
+      run: gem install ./echonet_lite_gem-*.gem --no-document
