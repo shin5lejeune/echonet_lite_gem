@@ -8,9 +8,12 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.3)
+    bundler-audit (0.9.3)
+      bundler (>= 1.2.0)
+      thor (~> 1.0)
     diff-lcs (1.6.2)
     hana (1.3.7)
-    json (2.20.0)
+    json (2.21.2)
     json_refs (0.1.9)
       hana
     language_server-protocol (3.17.0.5)
@@ -52,6 +55,7 @@ GEM
       parser (>= 3.3.7.2)
       prism (~> 1.7)
     ruby-progressbar (1.13.0)
+    thor (1.5.0)
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.2.0)
@@ -61,7 +65,9 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  bundler-audit (~> 0.9)
   echonet_lite_gem!
+  json (>= 2.21.2)
   rake (~> 13.0)
   rspec (~> 3.0)
   rubocop (~> 1.21)
