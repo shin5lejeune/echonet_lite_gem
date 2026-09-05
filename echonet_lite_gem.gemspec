@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary = "ECHONET Lite support for My HEMS"
   spec.description = "ECHONET Lite telegram parsing and node communication"
-  # spec.homepage = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage = "https://github.com/shin5lejeune/echonet_lite_gem.git"
   spec.license = "MIT"
 
   spec.required_ruby_version = ">= 3.2.0"
