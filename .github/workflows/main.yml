@@ -1,4 +1,4 @@
-name: Ruby
+name: Ruby CI
 
 on:
   push:
@@ -8,13 +8,14 @@ on:
   pull_request:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     name: Ruby ${{ matrix.ruby }}
     strategy:
       matrix:
         ruby:
-          - '3.3.0'
+          - '3.2'
+          - '3.3'
 
     steps:
     - uses: actions/checkout@v4
@@ -23,5 +24,9 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
-    - name: Run the default task
+    - name: Run tests and lint
       run: bundle exec rake
+    - name: Build gem
+      run: gem build echonet_lite_gem.gemspec
+    - name: Install built gem
+      run: gem install ./echonet_lite_gem-*.gem --local
