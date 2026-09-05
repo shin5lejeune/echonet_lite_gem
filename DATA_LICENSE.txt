@@ -1,0 +1,31 @@
+MRA Data Attribution and License Notice
+
+The files under lib/echonet_lite_gem/data/mraData/ are Machine Readable
+Appendix (MRA) data derived from the MRA release published by the ECHONET
+Consortium.
+
+Source
+------
+ECHONET Consortium, Machine Readable Appendix (MRA):
+https://echonet.jp/spec_mra/
+
+The bundled data identifies itself as follows in metaData.json:
+
+Copyright (C) 2021-2023 Kanagawa Institute of Technology, ECHONET Consortium
+Data version: 1.2.0
+Release: Q
+Date: 2023-04-28
+
+License
+-------
+The MRA data is not covered by the MIT License in LICENSE.txt. The bundled
+metadata does not state an open-source or other general-purpose data license.
+No separate data license is granted by this repository. Any use,
+redistribution, or modification of the MRA data is subject to the terms and
+notices of the original source and its applicable rights. Consult the ECHONET
+Consortium's official MRA page and the applicable release materials before
+redistributing the data.
+
+The MIT License applies only to this project's original code and documentation,
+and does not replace or override the copyright notice or licensing terms of the
+MRA data.

@@ -164,4 +164,6 @@ bin/console
 
 ## License
 
-このGemは[MIT License](LICENSE.txt)のもとで公開されています。
+このGemのオリジナルのコードおよびドキュメントは[MIT License](LICENSE.txt)のもとで公開されています。
+
+ただし、`lib/echonet_lite_gem/data/mraData/` に同梱しているMachine Readable Appendix（MRA）データは、このMIT Licenseの対象ではありません。MRAデータの出典、著作権表示、データライセンスについては[DATA_LICENSE.txt](DATA_LICENSE.txt)を参照してください。
