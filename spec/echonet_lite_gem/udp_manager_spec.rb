@@ -277,6 +277,33 @@ RSpec.describe EchonetLiteGem::UDPManager do
   end
 
   describe 'recv_worker' do
+    describe '#valid_telegram?' do
+      it '正常な電文を受け入れる' do
+        expect(@udp_m.__send__(:valid_telegram?, @msg)).to be true
+      end
+
+      it '短すぎる電文を拒否する' do
+        expect(@udp_m.__send__(:valid_telegram?, "\x10\x81".b)).to be false
+      end
+
+      it '不正なヘッダーの電文を拒否する' do
+        invalid_message = @msg.dup
+        invalid_message.setbyte(1, 0x80)
+
+        expect(@udp_m.__send__(:valid_telegram?, invalid_message)).to be false
+      end
+
+      it 'OPCまたはPDCとデータ長が一致しない電文を拒否する' do
+        invalid_opc = @msg.dup
+        invalid_opc.setbyte(11, 3)
+        invalid_pdc = @msg.byteslice(0, @msg.bytesize - 1)
+        invalid_pdc.setbyte(13, 3)
+
+        expect(@udp_m.__send__(:valid_telegram?, invalid_opc)).to be false
+        expect(@udp_m.__send__(:valid_telegram?, invalid_pdc)).to be false
+      end
+    end
+
     it 'recv_workerは、UDPSocketのrecvメソッドで電文を受信し、response_queueハッシュのtidをキーとした要素のqueueに入れる' do
       response_queue = @udp_m.instance_variable_get(:@response_queue)[@telegram.tid]
       @recv_queue << [@msg, 'sockaddr']

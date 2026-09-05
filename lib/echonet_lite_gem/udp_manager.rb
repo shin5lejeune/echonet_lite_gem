@@ -93,6 +93,8 @@ module EchonetLiteGem
 
           begin
             res = @udp.recvfrom(300) # res_msgにはメッセージが、sockaddrにはソケットのアドレスが代入される
+            next unless valid_telegram?(res[0])
+
             tid = res[0][2, 2].unpack1("n") # トランザクションID
             enqueue_response(tid, res)
           rescue IOError, Errno::EBADF # UDPソケットが閉じられた場合の例外処理
@@ -118,6 +120,25 @@ module EchonetLiteGem
         end
       rescue ThreadError
         # キューが満杯の場合は、受信スレッドを止めずにパケットを破棄する
+      end
+
+      def valid_telegram?(telegram)
+        return false unless telegram.is_a?(String) && telegram.bytesize >= 12
+        return false unless telegram.byteslice(0, 2)&.bytes == [0x10, 0x81]
+
+        bytes = telegram.unpack("C*")
+        property_count = bytes[11]
+        offset = 12
+
+        property_count.times do
+          return false if offset + 2 > bytes.length
+
+          data_length = bytes[offset + 1]
+          offset += 2 + data_length
+          return false if offset > bytes.length
+        end
+
+        offset == bytes.length
       end
   end
 end
