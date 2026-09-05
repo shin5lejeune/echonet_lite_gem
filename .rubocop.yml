@@ -1,0 +1,66 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  # 結果のsuggest部分を非表示にする
+  SuggestExtensions: false
+  # 最新のルールを適用する
+  NewCops: enable
+  # 何のルールに引っかかったか表示する
+  DisplayCopNames: true
+  # rubocopの対象外ファイル
+  Exclude:
+    - "Gemfile"
+    - "vendor/**/*"
+
+### ルールのカスタマイズ
+
+# 設定が厳しいので一旦全てfalseにする
+Metrics:
+  Enabled: false
+
+# privateの下のインデントのルールを変更
+Layout/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: indented_internal_methods
+
+# メソッドの改行ルール
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+# 一行の文字列の長さのルールを変更
+Layout/LineLength:
+  Max: 130
+
+# 日本語にコメントを許可
+Style/AsciiComments:
+  Enabled: false
+
+# クラスにコメントを残さなくても良い
+Style/Documentation:
+  Enabled: false
+
+# コントローラ等のモジュールをネストしての宣言
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# クラス変数の使用を許可する
+Style/ClassVars:
+  Exclude:
+    - 'lib/echonet_lite_gem/hems_controller.rb'
+
+# 文字列のfreeze（Ruby3からは自動でfreezeされるので要らない）
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# 文字列のダブルクォートチェック
+Style/StringLiterals:
+  Enabled: false
+
+# 文字列のダブルクォートチェック（式展開内）
+Style/StringLiteralsInInterpolation:
+  Enabled: false
+
+# メソッド名の最後に?を付けるルールのチェックを無効化する
+Naming/PredicateMethod:
+  Exclude:
+    - 'lib/echonet_lite_gem/hems_controller.rb'
