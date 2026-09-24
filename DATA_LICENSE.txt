@@ -16,16 +16,77 @@ Data version: 1.4.0
 Release: R (rev.3)
 Date: 2026-06-12
 
+Modification notice
+-------------------
+The MRA file published by the ECHONET Consortium contained an incorrect
+`dataVersion` value of `1.3.2`. This project corrected that metadata value to
+`1.4.0` in the bundled `metaData.json`, in accordance with the ECHONET
+Consortium's confirmation. This is a metadata correction to the bundled MRA
+data; the source, copyright, and version information above identify the MRA
+on which it is based.
+
 License
 -------
-The MRA data is not covered by the MIT License in LICENSE.txt. The bundled
-metadata does not state an open-source or other general-purpose data license.
-No separate data license is granted by this repository. Any use,
-redistribution, or modification of the MRA data is subject to the terms and
-notices of the original source and its applicable rights. Consult the ECHONET
-Consortium's official MRA page and the applicable release materials before
-redistributing the data.
+The MRA data is not covered by the MIT License in LICENSE.txt. According to
+permission obtained from the ECHONET Consortium, the MRA data may be bundled
+and redistributed in this repository and in the RubyGem, provided that the
+following conditions are met:
+
+* The MRA copyright belongs to the ECHONET Consortium and its copyright
+  notice is retained.
+* The MRA source, version, and applicable usage conditions are identified in
+  this file and in the README.
+* The MRA data is clearly distinguished from the original code and other
+  project materials.
+* If the MRA data is modified or restructured, the publication identifies it
+  as a modification or restructuring based on the ECHONET Consortium's MRA
+  and identifies the source and version used.
 
 The MIT License applies only to this project's original code and documentation,
 and does not replace or override the copyright notice or licensing terms of the
-MRA data.
+MRA data. The permission described above was provided for this project's
+stated GitHub and RubyGem distribution use; consult the ECHONET Consortium
+for permission before using the MRA data in a materially different way.
+
+
+日本語訳
+--------
+`lib/echonet_lite_gem/data/mraData/` 以下のファイルは、エコーネットコンソーシアムが
+公開したMachine Readable Appendix（MRA）を元にしたMRAデータです。
+
+出典
+----
+エコーネットコンソーシアム、Machine Readable Appendix（MRA）：
+https://echonet.jp/spec_mra/
+
+同梱データの `metaData.json` には、以下の情報が記載されています。
+
+著作権表示: Copyright (C) 2021-2026 Kanagawa Institute of Technology, ECHONET Consortium
+データバージョン: 1.4.0
+リリース: R (rev.3)
+日付: 2026-06-12
+
+修正について
+------------
+エコーネットコンソーシアムが公開したMRAファイルには、`dataVersion` が `1.3.2` と
+誤って記載されていました。本プロジェクトでは、エコーネットコンソーシアムからの
+確認に基づき、同梱する `metaData.json` のこの値を `1.4.0` に修正しています。これは
+同梱MRAデータに対するメタデータの修正であり、元にしたMRAの出典、著作権、バージョン
+情報は上記のとおりです。
+
+利用条件
+--------
+MRAデータは、LICENSE.txtに記載されたMITライセンスの対象ではありません。エコーネット
+コンソーシアムから得た許可に基づき、以下の条件を満たす場合に限り、このリポジトリおよび
+RubyGemにMRAデータを同梱して再配布できます。
+
+* MRAの著作権がエコーネットコンソーシアムに帰属することを示し、著作権表示を保持すること。
+* MRAの出典、バージョン、適用される利用条件を、このファイルおよびREADMEに明記すること。
+* MRAデータをオリジナルコードやその他のプロジェクト資料と明確に区別すること。
+* MRAデータを加工または再構成する場合、エコーネットコンソーシアムのMRAを元に加工または
+  再構成したものであること、および使用した出典とバージョンを公開時に明記すること。
+
+MITライセンスは、このプロジェクトのオリジナルコードとドキュメントにのみ適用され、MRA
+データの著作権表示や利用条件に取って代わるものではありません。上記の許可は、このプロ
+ジェクトで示したGitHubおよびRubyGemでの配布形態を対象としています。これらと実質的に
+異なる形態でMRAデータを利用する場合は、エコーネットコンソーシアムに確認してください。

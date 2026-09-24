@@ -167,3 +167,7 @@ bin/console
 このGemのオリジナルのコードおよびドキュメントは[MIT License](LICENSE.txt)のもとで公開されています。
 
 ただし、`lib/echonet_lite_gem/data/mraData/` に同梱しているMachine Readable Appendix（MRA）データは、このMIT Licenseの対象ではありません。MRAデータの出典、著作権表示、データライセンスについては[DATA_LICENSE.txt](DATA_LICENSE.txt)を参照してください。
+
+ECHONET Consortiumから、MRAデータをGitHubリポジトリおよびRubyGemに同梱して再配布することについて、著作権表示、出典、利用条件を明記し、MRAと本Gemのオリジナル部分を明確に区別することを条件に了承を得ています。MRAデータを加工・再構成した場合は、その旨と元にしたMRAの出典およびバージョンを明記します。詳細は[DATA_LICENSE.txt](DATA_LICENSE.txt)を参照してください。
+
+なお、公開MRAファイルの `dataVersion` にあった誤記 `1.3.2` は、エコーネットコンソーシアムの確認に基づき、本プロジェクトの同梱 `metaData.json` では `1.4.0` に修正しています。
